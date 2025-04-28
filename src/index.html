@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Entra external tenant authentication example using JavaScript</title>
+	<link rel="shortcut icon" href="favicon.ico" />
+    <link href="style.css" rel="stylesheet" />
+    <!-- Microsoft Authentication Library (MSAL) for JavaScript -->
+    <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 
+            When this page loads, app.js calls authenticationService.init(). 
+            This function checks if there are any signed-in users.
+        -->
+        <h1>Microsoft Entra external tenant authentication example using JavaScript</h1>
+ 
+        <!--
+            The sign-in-container displays when there is no user account.
+            The visibility is managed by app.js.
+        -->
+        <div id="sign-in-container">
+            <p>Welcome to the example. Please sign in to continue.</p>
+            <!-- 
+                The sign in button triggers the login process.
+                The file src/app.js adds an event listener to this button.
+                The listener calls authenticationService.loginRedirect.
+            -->
+            <button id="sign-in-button" class="auth-button">Sign In</button>
+        </div>
+
+        <!--
+            When a user clicks the sign-in button, the sign-in-container is
+            hidden and the signed-in-container is displayed.
+
+            The console may show some warnings such as:
+
+            * Content-Security-Policy: Ignoring “'unsafe-inline'” within
+              script-src: nonce-source or hash-source specified
+
+            * Layout was forced before the page was fully loaded. If stylesheets
+              are not yet loaded this may cause a flash of unstyled content.
+
+            * Cookie “*” will soon be rejected because it is foreign and does
+              not have the “Partitioned“ attribute. 1.0
+        -->
+        <div id="signed-in-container" style="display:none;">
+            <div class="user-info">
+                <div id="profile-info">
+                    <h2>Welcome, <span id="user-name">User</span>!</h2>
+                    <p>You are now signed in using Microsoft Entra ID.</p>
+                    <p>Email: <span id="user-email"></span></p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="get-profile-button" class="action-button">Get Profile Data</button>
+                <button id="sign-out-button" class="auth-button">Sign Out</button>
+            </div>
+            
+            <div id="api-response" class="api-response">
+                <h3>API Response</h3>
+                <pre id="api-response-data"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the example source files. The order matters. -->
+    <script src="config.js"></script>
+    <script src="authentication-service.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
